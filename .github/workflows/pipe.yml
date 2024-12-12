@@ -27,7 +27,7 @@ jobs:
 
       # Ensure correct npm version
       - name: Ensure correct npm version
-        run: npm install -g npm@latest
+        run: npm install -g npm@7
         # Kommentar: Installiert die neueste npm-Version, um Kompatibilität mit lockfileVersion 3 sicherzustellen.
 
   install-dependencies:
@@ -36,7 +36,7 @@ jobs:
     steps:
       # Install dependencies
       - name: Install dependencies
-        run: npm ci
+        run: npm i
         # Kommentar: Installiert Abhängigkeiten mit npm ci, was eine saubere Installation garantiert.
 
   lint:
