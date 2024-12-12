@@ -34,7 +34,7 @@ jobs:
     steps:
       # Install dependencies
       - name: Install dependencies
-        run: npm i
+        run: npm run clean install
         # Kommentar: Installiert Abhängigkeiten mit npm ci für konsistente Builds.
 
   lint:
