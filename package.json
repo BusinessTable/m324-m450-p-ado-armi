@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean install": " npm ci"
   },
   "dependencies": {
+    "m450-324-todo-app": "file:",
     "next": "15.0.3",
     "react": "18.3.1",
     "react-dom": "18.3.1",
