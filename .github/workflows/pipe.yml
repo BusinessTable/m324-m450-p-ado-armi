@@ -1,0 +1,77 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  checkout:
+    runs-on: ubuntu-latest
+    outputs:
+      workspace: ${{ steps.checkout.outputs.workspace }}
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        id: checkout
+        uses: actions/checkout@v4
+        # Kommentar: Holt den Code aus dem Repository.
+
+  setup-node:
+    runs-on: ubuntu-latest
+    needs: checkout
+    steps:
+      # Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+        # Kommentar: Stellt sicher, dass die korrekte Node.js-Version installiert ist.
+
+  install-dependencies:
+    runs-on: ubuntu-latest
+    needs: setup-node
+    steps:
+      # Install dependencies
+      - name: Install dependencies
+        run: npm i
+        # Kommentar: Installiert Abhängigkeiten mit npm ci für konsistente Builds.
+
+  lint:
+    runs-on: ubuntu-latest
+    needs: install-dependencies
+    steps:
+      # Run linter
+      - name: Run linter
+        run: npm run lint
+        # Kommentar: Überprüft den Code mit einem Linter auf Fehler und Formatierungsprobleme.
+
+  test:
+    runs-on: ubuntu-latest
+    needs: install-dependencies
+    steps:
+      # Run tests
+      - name: Run tests
+        run: npm test
+        # Kommentar: Führt Unit-Tests und Integrationstests durch.
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+      # Build project
+      - name: Build project
+        run: npm run build
+        # Kommentar: Führt den Build-Prozess für Next.js aus.
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .next
+        # Kommentar: Veröffentlicht das gebaute Projekt im `.next`-Verzeichnis auf GitHub Pages.
