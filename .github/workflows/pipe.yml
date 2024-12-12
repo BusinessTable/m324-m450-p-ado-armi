@@ -14,7 +14,7 @@ jobs:
       # Checkout the repository
       - name: Checkout code
         id: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         # Kommentar: Holt den Code aus dem Repository.
 
   setup-node:
@@ -23,7 +23,7 @@ jobs:
     steps:
       # Set up Node.js environment
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
         # Kommentar: Stellt sicher, dass die korrekte Node.js-Version installiert ist.
@@ -34,8 +34,9 @@ jobs:
     steps:
       # Install dependencies
       - name: Install dependencies
-        run: npm run clean install
-        # Kommentar: Installiert Abhängigkeiten mit npm ci für konsistente Builds.
+        working-directory: ./ # Passe das Verzeichnis an, falls package.json nicht im Root liegt
+        run: npm ci
+        # Kommentar: Installiert Abhängigkeiten mit npm ci, was eine saubere Installation garantiert.
 
   lint:
     runs-on: ubuntu-latest
@@ -43,6 +44,7 @@ jobs:
     steps:
       # Run linter
       - name: Run linter
+        working-directory: ./ # Passe das Verzeichnis an, falls package.json nicht im Root liegt
         run: npm run lint
         # Kommentar: Überprüft den Code mit einem Linter auf Fehler und Formatierungsprobleme.
 
@@ -52,6 +54,7 @@ jobs:
     steps:
       # Run tests
       - name: Run tests
+        working-directory: ./ # Passe das Verzeichnis an, falls package.json nicht im Root liegt
         run: npm test
         # Kommentar: Führt Unit-Tests und Integrationstests durch.
 
@@ -61,6 +64,7 @@ jobs:
     steps:
       # Build project
       - name: Build project
+        working-directory: ./ # Passe das Verzeichnis an, falls package.json nicht im Root liegt
         run: npm run build
         # Kommentar: Führt den Build-Prozess für Next.js aus.
 
