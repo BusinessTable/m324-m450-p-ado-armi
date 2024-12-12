@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "clean install": " npm ci"
+    "clean install": "npm ci"
   },
   "dependencies": {
     "m450-324-todo-app": "file:",
