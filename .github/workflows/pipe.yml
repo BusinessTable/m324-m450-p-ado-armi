@@ -1,4 +1,4 @@
-name: Build and Deploy to GitHub Pages
+name: CI Workflow for Shopping-List App
 
 on:
   push:
@@ -6,74 +6,69 @@ on:
       - main
 
 jobs:
-  checkout:
+  # Task 1: Initial Setup Job
+  setup:
     runs-on: ubuntu-latest
     steps:
-      # Checkout the repository
       - name: Checkout code
-        uses: actions/checkout@v3
-        # Kommentar: Holt den Code aus dem Repository.
-
-  setup-node:
-    runs-on: ubuntu-latest
-    needs: checkout
-    steps:
-      # Set up Node.js environment
+        uses: actions/checkout@v2
+        
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
-          node-version: '18'
-        # Kommentar: Stellt sicher, dass die korrekte Node.js-Version installiert ist.
+          node-version: '21'  # Updated Node.js version
 
-      # Ensure correct npm version
-      - name: Ensure correct npm version
-        run: npm install -g npm@7
-        # Kommentar: Installiert die neueste npm-Version, um Kompatibilität mit lockfileVersion 3 sicherzustellen.
-
-  install-dependencies:
-    runs-on: ubuntu-latest
-    needs: setup-node
-    steps:
-      # Install dependencies
       - name: Install dependencies
-        run: npm i
-        # Kommentar: Installiert Abhängigkeiten mit npm ci, was eine saubere Installation garantiert.
+        run: npm install
 
+      - name: Build application
+        run: npm run build
+
+  # Task 2: Linting Job
   lint:
     runs-on: ubuntu-latest
-    needs: install-dependencies
+    needs: setup  # Runs after setup job completes
     steps:
-      # Run linter
-      - name: Run linter
-        run: npm run lint
-        # Kommentar: Überprüft den Code mit einem Linter auf Fehler und Formatierungsprobleme.
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '21'  # Updated Node.js version
 
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run linting
+        run: npm run lint
+
+  # Task 2: Testing Job
   test:
     runs-on: ubuntu-latest
-    needs: install-dependencies
+    needs: lint  # Runs after lint job completes
     steps:
-      # Run tests
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '21'  # Updated Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Run tests
         run: npm test
-        # Kommentar: Führt Unit-Tests und Integrationstests durch.
 
-  build:
-    runs-on: ubuntu-latest
-    needs: [lint, test]
-    steps:
-      # Build project
-      - name: Build project
-        run: npm run build
-        # Kommentar: Führt den Build-Prozess für Next.js aus.
-
+  # Task 3: Deployment Simulation Job
   deploy:
     runs-on: ubuntu-latest
-    needs: build
+    needs: test  # Runs after test job completes successfully
     steps:
-      # Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .next
-        # Kommentar: Veröffentlicht das gebaute Projekt im `.next`-Verzeichnis auf GitHub Pages.
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Simulate Deployment
+        run: echo "Deployment successful"
