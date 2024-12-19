@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 import { useState, useEffect } from "react";
@@ -18,7 +18,7 @@ const TodoContainer = () => {
   };
 
   useEffect(() => {
-    getInitialTodos()
+    setTodos(getInitialTodos());
   }, []);
 
   const handleChange = (id) => {
@@ -39,27 +39,34 @@ const TodoContainer = () => {
     setTodos([...todos.filter((todo) => todo.id !== id)]);
   };
 
-  const addTodoItem = (title) => {
+  const addTodoItem = (title, priority) => {
     const newTodo = {
       id: uuidv4(),
       title,
       completed: false,
+      priority, // Neue Priorität hinzufügen
     };
     setTodos([...todos, newTodo]);
   };
 
-  const setUpdate = (updatedTitle, id) => {
+  const updatePriority = (id, newPriority) => {
     setTodos(
       todos.map((todo) => {
         if (todo.id === id) {
-          todo.title = updatedTitle;
+          return { ...todo, priority: newPriority };
         }
         return todo;
       })
     );
   };
 
-  // storing todos items
+  const sortTodosByPriority = () => {
+    const priorityOrder = { high: 1, medium: 2, low: 3 };
+    return [...todos].sort(
+      (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]
+    );
+  };
+
   useEffect(() => {
     const temp = JSON.stringify(todos);
     localStorage.setItem("todos", temp);
@@ -70,10 +77,10 @@ const TodoContainer = () => {
       <Header />
       <InputTodo addTodoProps={addTodoItem} />
       <TodosList
-        todos={todos}
+        todos={sortTodosByPriority()} // Aufgaben sortieren
         handleChangeProps={handleChange}
         deleteTodoProps={delTodo}
-        setUpdate={setUpdate}
+        updatePriorityProps={updatePriority} // Priorität aktualisieren
       />
     </div>
   );

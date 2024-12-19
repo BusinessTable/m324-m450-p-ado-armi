@@ -1,47 +1,47 @@
-/* eslint react/prop-types: 0 */
-import { useState } from "react";
-import { FaPlusCircle } from "react-icons/fa";
+import React, { useState } from "react";
+import styles from "./InputTodo.module.css";
 
-const InputTodo = (props) => {
-  const [inputText, setInputText] = useState({
-    title: "",
-  });
+const InputTodo = ({ addTodoProps }) => {
+  const [inputText, setInputText] = useState("");
+  const [priority, setPriority] = useState("medium"); // Standardpriorität
 
-  const onChange = (e) => {
-    setInputText({
-      ...inputText,
-      [e.target.name]: e.target.value,
-    });
+  const handleInputChange = (e) => {
+    setInputText(e.target.value);
+  };
+
+  const handlePriorityChange = (e) => {
+    setPriority(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (inputText.title.trim()) {
-      props.addTodoProps(inputText.title);
-      setInputText({
-        title: "",
-      });
-    } else {
-      alert("Please write item");
+    if (inputText.trim()) {
+      addTodoProps(inputText, priority);
+      setInputText("");
+      setPriority("medium");
     }
   };
 
   return (
-    <form
-      data-set="todo-form"
-      onSubmit={handleSubmit}
-      className="form-container"
-    >
+    <form onSubmit={handleSubmit} className={styles.form}>
       <input
         type="text"
-        className="input-text"
-        placeholder="Add todo..."
-        value={inputText.title}
-        name="title"
-        onChange={onChange}
+        placeholder="Add Task..."
+        value={inputText}
+        onChange={handleInputChange}
+        className={styles.input}
       />
-      <button data-set="add-todo-btn" className="input-submit">
-        <FaPlusCircle />
+      <select
+        value={priority}
+        onChange={handlePriorityChange}
+        className={styles.select}
+      >
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+      <button type="submit" className={styles.submitBtn}>
+        Add
       </button>
     </form>
   );
