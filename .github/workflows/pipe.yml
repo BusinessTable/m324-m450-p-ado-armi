@@ -147,5 +147,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .next/static # This is where the static files are located
+          publish_dir: out # This is where the static files are located
         # Deploy the static files from the `.next/static` directory to GitHub Pages.

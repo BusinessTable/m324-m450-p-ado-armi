@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "clean install": "npm ci",
-    "test": "jest"
+    "test": "jest",
+    "export": "next export"
   },
   "dependencies": {
     "m450-324-todo-app": "file:",
