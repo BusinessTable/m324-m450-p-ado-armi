@@ -10,6 +10,8 @@ const TodosList = (props) => (
         handleChangeProps={props.handleChangeProps}
         deleteTodoProps={props.deleteTodoProps}
         setUpdate={props.setUpdate}
+        updateCategoryProps={props.updateCategoryProps}
+        categories={props.categories}
       />
     ))}
   </ul>

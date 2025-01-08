@@ -23,7 +23,7 @@ const TodoItem = (props) => {
     textDecoration: "line-through",
   };
 
-  const { completed, id, title } = props.todo;
+  const { completed, id, title, priority, category, dueDate } = props.todo;
 
   const viewMode = {};
   const editMode = {};
@@ -41,8 +41,24 @@ const TodoItem = (props) => {
     []
   );
 
+  const handleCategoryChange = (e) => {
+    props.updateCategoryProps(id, e.target.value);
+  };
+
+  // Funktion zur Überprüfung, ob die Deadline in den nächsten 24 Stunden liegt
+  const isDueSoon = () => {
+    if (!dueDate) return false;
+    const now = new Date();
+    const due = new Date(dueDate);
+    return due - now <= 24 * 60 * 60 * 1000 && due > now;
+  };
+
+  const itemStyle = isDueSoon()
+    ? { backgroundColor: "#ffe6e6" } // Rot markieren, wenn bald fällig
+    : {};
+
   return (
-    <li className={styles.item} data-type="todo-item">
+    <li className={styles.item} style={itemStyle} data-type="todo-item">
       <div onDoubleClick={handleEditing} style={viewMode}>
         <input
           type="checkbox"
@@ -57,7 +73,9 @@ const TodoItem = (props) => {
         >
           <FaTrash style={{ color: "orangered", fontSize: "16px" }} />
         </button>
+        <span className={styles.priority}>Prio: ({priority})</span>
         <span style={completed ? completedStyle : null}>{title}</span>
+        {dueDate && <span className={styles.dueDate}>Due: {dueDate}</span>}
       </div>
       <input
         type="text"
@@ -69,6 +87,21 @@ const TodoItem = (props) => {
         }}
         onKeyDown={handleUpdatedDone}
       />
+      <div className={styles.categorySelect}>
+        <label htmlFor={`category-${id}`}>Category:</label>
+        <select
+          id={`category-${id}`}
+          value={category}
+          onChange={handleCategoryChange}
+          name="category"
+        >
+          {props.categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
+      </div>
     </li>
   );
 };
