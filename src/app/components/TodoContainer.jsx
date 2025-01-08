@@ -64,8 +64,18 @@ const TodoContainer = () => {
   };
 
   const filterTodosByCategory = () => {
-    if (selectedCategory === "All") return todos;
-    return todos.filter((todo) => todo.category === selectedCategory);
+    const priorityOrder = { high: 1, medium: 2, low: 3 };
+
+    // Zuerst nach Kategorie filtern
+    const filteredTodos =
+      selectedCategory === "All"
+        ? todos
+        : todos.filter((todo) => todo.category === selectedCategory);
+
+    // Dann die Todos nach Priorität sortieren
+    return filteredTodos.sort(
+      (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]
+    );
   };
 
   useEffect(() => {
