@@ -25,11 +25,10 @@ jobs:
 
       - name: Show current working directory
         run: pwd
-        
+
       # Debugging Schritt: Überprüfen, ob der .next-Ordner existiert
       - name: List build output
-        run: ls -la .next
-
+        run: ls
 
   # Task 2: Linting Job
   lint:
