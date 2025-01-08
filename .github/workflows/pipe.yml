@@ -3,83 +3,149 @@ name: CI Workflow for Todo App
 on:
   push:
     branches:
-      - main
+      - main # Trigger the workflow on pushes to the "main" branch.
 
 jobs:
+  # Task 1: Cache and Build
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Use the latest Ubuntu environment for the build.
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        # Check out the code from the repository.
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '21'
+        # Set up Node.js version 21, as required by the project.
+
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+        # Cache the Node.js modules (node_modules) to speed up dependency installation.
 
       - name: Install dependencies
         run: npm ci
+        # Install dependencies using a clean install to ensure consistency.
+
+      - name: Cache .next folder
+        uses: actions/cache@v3
+        with:
+          path: .next
+          key: ${{ runner.os }}-next-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-next-
+        # Cache the `.next` folder to reuse the build output in subsequent steps.
 
       - name: Build application
         run: npm run build
+        # Build the application using the `npm run build` command.
 
-      # Debugging Schritt: Überprüfen, ob der .next-Ordner existiert
-      - name: List build output
-        run: ls -la .next
-
-
-  # Task 2: Linting Job
+  # Task 2: Linting
   lint:
-    runs-on: ubuntu-latest
-    needs: build
+    runs-on: ubuntu-latest # Use the latest Ubuntu environment for linting.
+    needs: build # This job depends on the completion of the "build" job.
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        # Check out the code from the repository.
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '21'
+        # Set up Node.js version 21 for linting.
+
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+        # Cache the Node.js modules (node_modules) for faster dependency installation.
 
       - name: Install dependencies
         run: npm ci
+        # Install dependencies for the linting process.
 
       - name: Run linting
         run: npm run lint
+        # Run the linting process to check for code style and errors.
 
-  # Task 3: Testing Job
+  # Task 3: Testing
   test:
-    runs-on: ubuntu-latest
-    needs: build
+    runs-on: ubuntu-latest # Use the latest Ubuntu environment for testing.
+    needs: build # This job depends on the completion of the "build" job.
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        # Check out the code from the repository.
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '21'
+        # Set up Node.js version 21 for testing.
+
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+        # Cache the Node.js modules (node_modules) for faster dependency installation.
 
       - name: Install dependencies
         run: npm ci
+        # Install dependencies required for the tests.
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v3
+      - name: Cache .next folder
+        uses: actions/cache@v3
         with:
-          name: build-artifact
+          path: .next
+          key: ${{ runner.os }}-next-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-next-
+        # Cache the `.next` folder to reuse the build output during testing.
 
       - name: Run tests
         run: npm test
+        # Run the tests to verify application functionality.
 
-  # Task 4: Deployment Simulation Job
+  # Task 4: Deploy to GitHub Pages
   deploy:
-    runs-on: ubuntu-latest
-    needs: [lint, test]
+    runs-on: ubuntu-latest # Use the latest Ubuntu environment for deployment.
+    needs: [lint, test] # This job depends on the completion of both "lint" and "test" jobs.
     steps:
-      - name: Download build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: build-artifact
+      - name: Checkout code
+        uses: actions/checkout@v2
+        # Check out the code from the repository.
 
-      - name: Simulate Deployment
-        run: echo "Deployment successful"
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '21'
+        # Set up Node.js version 21 for the deployment process.
+
+      - name: Cache .next folder
+        uses: actions/cache@v3
+        with:
+          path: .next
+          key: ${{ runner.os }}-next-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-next-
+        # Cache the `.next` folder to reuse the build output during deployment.
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .next/static # This is where the static files are located
+        # Deploy the static files from the `.next/static` directory to GitHub Pages.
