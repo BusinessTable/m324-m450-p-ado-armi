@@ -6,6 +6,7 @@ on:
       - main
 
 jobs:
+  # Task 1: Build and Store Artifacts
   build:
     runs-on: ubuntu-latest
     steps:
@@ -15,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '21'
+          node-version: '21' # Compatible with Next.js 15 and React 18
 
       - name: Install dependencies
         run: npm ci
@@ -23,12 +24,11 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Show current working directory
-        run: pwd
-
-      # Debugging Schritt: Überprüfen, ob der .next-Ordner existiert
-      - name: List build output
-        run: ls
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: ${{ github.workspace }}/.next
 
   # Task 2: Linting Job
   lint:
