@@ -46,6 +46,10 @@ jobs:
         run: npm run build
         # Build the application using the `npm run build` command.
 
+      - name: Export application
+        run: npm run export
+        # Export the application using the `npm run export` command.
+
   # Task 2: Linting
   lint:
     runs-on: ubuntu-latest # Use the latest Ubuntu environment for linting.
