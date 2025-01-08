@@ -23,7 +23,7 @@ const TodoItem = (props) => {
     textDecoration: "line-through",
   };
 
-  const { completed, id, title } = props.todo;
+  const { completed, id, title, category } = props.todo;
 
   const viewMode = {};
   const editMode = {};
@@ -40,6 +40,10 @@ const TodoItem = (props) => {
     },
     []
   );
+
+  const handleCategoryChange = (e) => {
+    props.updateCategoryProps(id, e.target.value);
+  };
 
   return (
     <li className={styles.item} data-type="todo-item">
@@ -58,6 +62,7 @@ const TodoItem = (props) => {
           <FaTrash style={{ color: "orangered", fontSize: "16px" }} />
         </button>
         <span style={completed ? completedStyle : null}>{title}</span>
+        <span className={styles.category}>({category})</span>
       </div>
       <input
         type="text"
@@ -69,6 +74,21 @@ const TodoItem = (props) => {
         }}
         onKeyDown={handleUpdatedDone}
       />
+      <div className={styles.categorySelect}>
+        <label htmlFor={`category-${id}`}>Category:</label>
+        <select
+          id={`category-${id}`}
+          value={category}
+          onChange={handleCategoryChange}
+          name="category"
+        >
+          {props.categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
+      </div>
     </li>
   );
 };
