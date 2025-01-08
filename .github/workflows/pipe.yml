@@ -24,6 +24,9 @@ jobs:
       - name: Build application
         run: npm run build
 
+      - name: list files
+        run: ls -la
+
       - name: upload artifacts
         uses: actions/upload-artifact@v4
         with:
