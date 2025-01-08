@@ -41,13 +41,14 @@ const TodoContainer = () => {
     setTodos([...todos.filter((todo) => todo.id !== id)]);
   };
 
-  const addTodoItem = (title, priority, category) => {
+  const addTodoItem = (title, priority, category, dueDate) => {
     const newTodo = {
       id: uuidv4(),
       title,
       completed: false,
       priority,
       category,
+      dueDate, // Fälligkeitsdatum hinzufügen
     };
     setTodos([...todos, newTodo]);
   };
@@ -72,10 +73,20 @@ const TodoContainer = () => {
         ? todos
         : todos.filter((todo) => todo.category === selectedCategory);
 
-    // Dann die Todos nach Priorität sortieren
-    return filteredTodos.sort(
-      (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]
-    );
+    // Dann nach Fälligkeitsdatum und Priorität sortieren
+    return filteredTodos.sort((a, b) => {
+      const dateA = new Date(a.dueDate).getTime();
+      const dateB = new Date(b.dueDate).getTime();
+
+      if (!isNaN(dateA) && !isNaN(dateB)) {
+        return dateA - dateB; // Frühere Deadlines zuerst
+      }
+
+      if (!isNaN(dateA)) return -1; // Aufgaben mit Deadlines haben Vorrang
+      if (!isNaN(dateB)) return 1;
+
+      return priorityOrder[a.priority] - priorityOrder[b.priority]; // Falls keine Deadlines vorhanden sind
+    });
   };
 
   useEffect(() => {
@@ -92,14 +103,18 @@ const TodoContainer = () => {
   return (
     <div className={styles.inner}>
       <Header />
+      <InputTodo
+        addTodoProps={addTodoItem}
+        addCategoryProps={addNewCategory}
+        categories={categories}
+      />
       <CategoryFilter
         categories={categories}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
-      <InputTodo addTodoProps={addTodoItem} addCategoryProps={addNewCategory} categories={categories} />
       <TodosList
-        todos={filterTodosByCategory()}
+        todos={filterTodosByCategory()} // Gefilterte und sortierte Todos
         handleChangeProps={handleChange}
         deleteTodoProps={delTodo}
         setUpdate={(title, id) => {
