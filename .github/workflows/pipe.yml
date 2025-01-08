@@ -46,10 +46,6 @@ jobs:
         run: npm run build
         # Build the application using the `npm run build` command.
 
-      - name: Export application
-        run: npm run export
-        # Export the application using the `npm run export` command.
-
   # Task 2: Linting
   lint:
     runs-on: ubuntu-latest # Use the latest Ubuntu environment for linting.
@@ -151,5 +147,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: out # This is where the static files are located
+          publish_dir: ./out # This is where the static files are located
         # Deploy the static files from the `.next/static` directory to GitHub Pages.
