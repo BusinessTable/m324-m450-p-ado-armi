@@ -23,7 +23,7 @@ const TodoItem = (props) => {
     textDecoration: "line-through",
   };
 
-  const { completed, id, title, category } = props.todo;
+  const { completed, id, title, priority, category } = props.todo;
 
   const viewMode = {};
   const editMode = {};
@@ -61,8 +61,8 @@ const TodoItem = (props) => {
         >
           <FaTrash style={{ color: "orangered", fontSize: "16px" }} />
         </button>
+        <span className={styles.priority}>Prio: ({priority})</span>
         <span style={completed ? completedStyle : null}>{title}</span>
-        <span className={styles.category}>({category})</span>
       </div>
       <input
         type="text"

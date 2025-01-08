@@ -14,6 +14,16 @@
   margin-right: 10px;
 }
 
+.category {
+  padding: 5px 8px;
+  font-size: 14px;
+}
+
+.priority {
+  padding: 5px 8px;
+  font-size: 14px;
+}
+
 .textInput {
   flex: 1;
   margin-right: 10px;
