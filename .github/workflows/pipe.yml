@@ -1,4 +1,4 @@
-name: CI Workflow for Shopping-List App
+name: CI Workflow for Todo App
 
 on:
   push:
@@ -6,69 +6,82 @@ on:
       - main
 
 jobs:
-  # Task 1: Initial Setup Job
-  setup:
+  # Task 1: Build and Store Artifacts
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '21'  # Updated Node.js version
+          node-version: '21' # Compatible with Next.js 15 and React 18
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build application
         run: npm run build
 
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: .next # Build output folder for Next.js
+
   # Task 2: Linting Job
   lint:
     runs-on: ubuntu-latest
-    needs: setup  # Runs after setup job completes
+    needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '21'  # Updated Node.js version
+          node-version: '21'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run linting
         run: npm run lint
 
-  # Task 2: Testing Job
+  # Task 3: Testing Job
   test:
     runs-on: ubuntu-latest
-    needs: lint  # Runs after lint job completes
+    needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '21'  # Updated Node.js version
+          node-version: '21'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifact
 
       - name: Run tests
         run: npm test
 
-  # Task 3: Deployment Simulation Job
+  # Task 4: Deployment Simulation Job
   deploy:
     runs-on: ubuntu-latest
-    needs: test  # Runs after test job completes successfully
+    needs: [lint, test]
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifact
+
       - name: Simulate Deployment
         run: echo "Deployment successful"
