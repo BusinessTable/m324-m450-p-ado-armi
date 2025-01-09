@@ -43,68 +43,104 @@ So sieht die Todo-App aus:
 
 ## Testing
 
-| **File**              | **% Stmts** | **% Branch** | **% Funcs** | **% Lines** | **Uncovered Line #s**                   |
-|-----------------------|-------------|--------------|-------------|-------------|-----------------------------------------|
-| **All files**         | 88          | 86.2         | 76.66       | 88          |                                         |
-| **app**               | 0           | 0            | 0           | 0           |                                         |
-| layout.jsx            | 0           | 0            | 0           | 0           | 1-28                                    |
-| page.jsx              | 0           | 0            | 0           | 0           | 1-11                                    |
-| **app/components**    | 95.87       | 89.28        | 82.14       | 95.87       |                                         |
-| CategoryFilter.jsx    | 100         | 100          | 100         | 100         |                                         |
-| Header.jsx            | 100         | 100          | 100         | 100         |                                         |
-| InputTodo.jsx         | 95.04       | 100          | 62.5        | 95.04       | 16-17,20-21,28-29                       |
-| TodoContainer.jsx     | 90.9        | 73.91        | 77.77       | 90.9        | 35-36,41-42,62-63,82-83,121-124         |
-| TodoItem.jsx          | 100         | 100          | 100         | 100         |                                         |
-| TodosList.jsx         | 100         | 100          | 100         | 100         |                                         |
+### Test Coverage Report
 
-## **Übersicht aller erstellten Tests**
+| **File**             | **% Stmts** | **% Branch** | **% Funcs** | **% Lines** | **Uncovered Line #s**                |
+|-----------------------|-------------|--------------|-------------|-------------|---------------------------------------|
+| **All files**         | 95.87       | 89.28        | 82.14       | 95.87       |                                       |
+| `CategoryFilter.jsx`  | 100         | 100          | 100         | 100         |                                       |
+| `Header.jsx`          | 100         | 100          | 100         | 100         |                                       |
+| `InputTodo.jsx`       | 95.04       | 100          | 62.5        | 95.04       | 16-17, 20-21, 28-29                  |
+| `TodoContainer.jsx`   | 90.9        | 73.91        | 77.77       | 90.9        | 35-36, 41-42, 62-63, 82-83, 121-124  |
+| `TodoItem.jsx`        | 100         | 100          | 100         | 100         |                                       |
+| `TodosList.jsx`       | 100         | 100          | 100         | 100         |                                       |
 
-### **Unit Tests**
+### Test Suite Summary
 
-Diese Tests überprüfen die korrekte Funktionalität einzelner Funktionen oder Komponenten in Isolation.
+- **Test Suites**: 4 passed, 4 total
+- **Tests**: 30 passed, 30 total
+- **Snapshots**: 0 total
+- **Time**: 3.453 seconds
 
-| **Test ID** | **Komponente/Modul**       | **Testname**                                               | **Beschreibung**                                                                                       |
-|-------------|----------------------------|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
-| UT1         | `TodoContainer`           | `Initializes todos from localStorage`                     | Überprüft, ob die Todos korrekt aus `localStorage` geladen werden.                                   |
-| UT2         | `TodoContainer`           | `Toggles todo completion`                                 | Verifiziert, dass der Status einer Aufgabe erfolgreich geändert wird (erledigt/offen).               |
-| UT3         | `TodoContainer`           | `Deletes a todo`                                          | Prüft, ob eine Aufgabe korrekt aus der Liste entfernt wird.                                          |
-| UT4         | `TodoContainer`           | `Adds a new todo`                                         | Validiert das Hinzufügen einer neuen Aufgabe mit Titel, Priorität, Kategorie und Fälligkeitsdatum.   |
-| UT5         | `TodoContainer`           | `Updates a todo's category`                               | Überprüft, ob die Kategorie einer Aufgabe korrekt aktualisiert wird.                                |
-| UT6         | `TodoContainer`           | `Filters todos by category`                               | Testet die Filterfunktion basierend auf der ausgewählten Kategorie.                                  |
-| UT7         | `TodoContainer`           | `Sorts todos by due date and priority`                    | Prüft, ob Aufgaben korrekt nach Fälligkeitsdatum und Priorität sortiert werden.                     |
-| UT8         | `TodoContainer`           | `Adds a new category`                                     | Überprüft, ob eine neue Kategorie korrekt zur Liste hinzugefügt wird.                               |
-| UT9         | `InputTodo`               | `Adds a task with a new category`                         | Validiert, ob eine Aufgabe mit einer neuen Kategorie hinzugefügt wird.                              |
-| UT10        | `CategoryFilter`          | `Changes selected category`                               | Prüft, ob das Wechseln der Filterkategorie korrekt funktioniert.                                    |
 
----
+## **Testübersicht**
 
-### **Integration Tests**
+### **1. Unit Tests**
 
-Diese Tests überprüfen die Interaktion zwischen verschiedenen Komponenten und Modulen.
-
-| **Test ID** | **Komponente/Modul**       | **Testname**                                               | **Beschreibung**                                                                                       |
-|-------------|----------------------------|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
-| IT1         | `TodoContainer`           | `Renders TodoContainer with initial state`                | Überprüft, ob alle Kindkomponenten korrekt mit Standardwerten gerendert werden.                       |
-| IT2         | `InputTodo` + `TodosList` | `Adds a new todo and displays it`                         | Testet die Interaktion zwischen `InputTodo` und `TodosList` beim Hinzufügen und Anzeigen neuer Aufgaben. |
-| IT3         | `CategoryFilter` + `TodosList` | `Filters todos by category`                              | Validiert, ob Aufgaben basierend auf der ausgewählten Kategorie korrekt gefiltert werden.             |
-| IT4         | `TodosList` + `TodoContainer` | `Toggles todo completion state`                          | Überprüft die Interaktion zwischen der Aufgabenliste und der Statusänderungsfunktion.                |
-| IT5         | `TodosList` + `TodoContainer` | `Deletes a todo from the list`                           | Verifiziert, dass das Löschen einer Aufgabe aus der Liste korrekt funktioniert.                      |
-| IT6         | `InputTodo` + `TodoContainer` | `Adds a new category and assigns to todo`                | Überprüft, ob eine neue Kategorie hinzugefügt und korrekt zu einer Aufgabe zugewiesen wird.          |
-| IT7         | `TodoContainer`           | `Sorts todos by priority and due date`                    | Validiert die Sortierung und Anzeige der Aufgaben nach Priorität und Fälligkeitsdatum.               |
+| **Komponente/Funktion**     | **Testfall**                                   | **Beschreibung**                                         | **Erwartetes Ergebnis**                                    |
+|------------------------------|-----------------------------------------------|---------------------------------------------------------|-----------------------------------------------------------|
+| **sortTodosByPriority**      | Sortiert Todos nach Priorität                 | Validierung der korrekten Reihenfolge (hoch, mittel, niedrig). | Todos werden in der Reihenfolge: Hoch > Mittel > Niedrig angezeigt. |
+|                              | Verändert das ursprüngliche Todos-Array nicht | Sicherstellung der Unveränderlichkeit des Original-Arrays. | Das ursprüngliche Array bleibt unverändert.               |
+|                              | Handhabt leeres Array                        | Prüfung auf Robustheit bei fehlenden Einträgen.         | Rückgabe eines leeren Arrays.                             |
+|                              | Behandelt Todos mit gleicher Priorität        | Prüfung der Stabilität bei gleichen Prioritäten.        | Todos mit gleicher Priorität behalten ihre ursprüngliche Reihenfolge. |
+| **filterTodosByCategory**    | Gibt alle Todos zurück, wenn Kategorie "All" ist | Validierung der vollständigen Ausgabe ohne Filter.      | Alle Todos werden ohne Filter zurückgegeben.              |
+|                              | Filtert Todos nach ausgewählter Kategorie    | Überprüfung der Filterlogik.                           | Nur Todos der gewählten Kategorie werden zurückgegeben.   |
+|                              | Sortiert Todos innerhalb einer Kategorie nach Datum | Sicherstellung der Sortierung nach Deadlines.         | Todos werden nach Datum sortiert, früheste Deadlines zuerst. |
+|                              | Platzierung von Todos ohne Deadlines am Ende | Validierung der Deadlines-Sortierung.                  | Todos ohne Deadlines erscheinen am Ende der Liste.        |
+|                              | Sortiert Todos nach Priorität bei fehlenden Deadlines | Sicherstellung der Sortierung nach Priorität.        | Todos werden nach Priorität sortiert, wenn keine Deadlines vorhanden sind. |
+|                              | Gibt leeres Array zurück, wenn keine Todos zur Kategorie passen | Prüfung der korrekten Ausgabe bei leeren Ergebnissen. | Rückgabe eines leeren Arrays.                             |
+|                              | Handhabt leeres Todos-Array                  | Überprüfung der Funktionalität bei fehlenden Todos.    | Rückgabe eines leeren Arrays.                             |
 
 ---
 
-### **End-to-End Tests**
+### **2. Integration Tests**
 
-Diese Tests simulieren vollständige Benutzerinteraktionen und überprüfen das Verhalten der gesamten Anwendung.
-
-| **Test ID** | **Komponente/Modul**       | **Testname**                                               | **Beschreibung**                                                                                       |
-|-------------|----------------------------|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
-| E2E1        | Gesamtanwendung           | `Complete workflow of adding, filtering, and deleting todos` | Simuliert den gesamten Workflow: Aufgaben hinzufügen, nach Kategorien filtern und Aufgaben löschen. |
+| **Komponente**              | **Testfall**                                                                 | **Beschreibung**                                         | **Erwartetes Ergebnis**                                    |
+|------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------|-----------------------------------------------------------|
+| **InputTodo Component**      | Rendern von Eingabefeldern und Buttons                                      | Überprüfung, ob alle Elemente korrekt angezeigt werden. | Alle Eingabefelder und Buttons werden korrekt gerendert.  |
+|                              | Fügt keine Aufgabe hinzu, wenn Eingabe leer ist                            | Validierung der Eingabeüberprüfung.                     | Keine Aufgabe wird hinzugefügt, wenn das Eingabefeld leer ist. |
+|                              | Hinzufügen einer neuen Kategorie                                           | Dynamisches Management von Kategorien.                 | Die neue Kategorie wird der Kategorienliste hinzugefügt.  |
+|                              | Fügt keine Kategorie hinzu, wenn Eingabe leer ist                          | Validierung der Eingabeüberprüfung für Kategorien.      | Keine Kategorie wird hinzugefügt, wenn das Eingabefeld leer ist. |
+|                              | Dynamisches Rendern von Kategorien                                         | Überprüfung, ob Kategorien korrekt aktualisiert werden. | Die neu hinzugefügte Kategorie erscheint in der Dropdown-Liste. |
+| **TodoItem Component**       | Rendern eines Todo-Items mit Details                                       | Sicherstellung der korrekten Anzeige von Details.       | Das Todo-Item zeigt den Titel, die Priorität, die Kategorie und das Fälligkeitsdatum korrekt an. |
+|                              | Markiert Aufgabe als erledigt                                              | Überprüfung der Checkbox-Funktionalität.               | Die Aufgabe wird als "erledigt" markiert, wenn die Checkbox aktiviert ist. |
+|                              | Löscht Aufgabe                                                             | Validierung der Löschfunktion.                         | Die Aufgabe wird aus der Liste entfernt.                  |
+|                              | Ermöglicht Bearbeiten des Titels                                           | Überprüfung der Editierbarkeit des Titels.             | Der Titel des Todos wird erfolgreich aktualisiert.        |
+|                              | Ändert Kategorie der Aufgabe                                              | Sicherstellung der Kategoriewechselfunktion.           | Die neue Kategorie wird dem Todo zugewiesen.              |
+|                              | Hebt bald fällige Aufgaben hervor                                          | Überprüfung der visuellen Markierung für Deadlines.    | Die Aufgabe wird rot markiert, wenn sie innerhalb von 24 Stunden fällig ist. |
+|                              | Hebt nicht bald fällige Aufgaben nicht hervor                              | Validierung der korrekten visuellen Darstellung.       | Die Aufgabe bleibt unverändert, wenn sie nicht bald fällig ist. |
 
 ---
 
-### **Zusammenfassung**
+### **3. End-to-End Tests**
+
+| **Komponente**              | **Testfall**                                                                 | **Beschreibung**                                         | **Erwartetes Ergebnis**                                    |
+|------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------|-----------------------------------------------------------|
+| **TodoContainer Component**  | Initialzustand rendern                                                      | Sicherstellung der korrekten Startbedingungen.          | Die Standardkategorien ("All", "Work", "Personal", "Shopping") und leere Todos werden angezeigt. |
+|                              | Hinzufügen eines neuen Todos                                               | Überprüfung der Hinzufüge-Funktionalität.              | Das neue Todo erscheint in der Liste mit den korrekten Details. |
+|                              | Umschalten des Todo-Status                                                 | Validierung der Änderungsfunktion für "erledigt".       | Der Status des Todos wechselt zwischen "erledigt" und "nicht erledigt". |
+|                              | Aktualisieren der Kategorie eines Todos                                    | Sicherstellung der Kategoriewechselfunktion.           | Die neue Kategorie wird dem Todo korrekt zugewiesen.      |
+|                              | Filtern von Todos nach Kategorie                                           | Überprüfung der Filterlogik.                           | Nur Todos der ausgewählten Kategorie werden angezeigt.    |
+|                              | Speichern von Todos in localStorage                                        | Validierung der Speicherfunktion.                      | Die Todos werden erfolgreich im localStorage gespeichert. |
+|                              | Laden von Todos aus localStorage                                           | Sicherstellung der Ladefunktion.                       | Die Todos werden beim Laden der Seite aus dem localStorage geladen. |
+
+| **Komponente**              | **Testfall**                                                                 | **Beschreibung**                                         | **Erwartetes Ergebnis**                                    |
+|------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------|-----------------------------------------------------------|
+| **TodoContainer Component**  | Initialzustand rendern                                                      | Sicherstellung der korrekten Startbedingungen.          | Die Standardkategorien ("All", "Work", "Personal", "Shopping") und leere Todos werden angezeigt. |
+|                              | Hinzufügen eines neuen Todos                                               | Überprüfung der Hinzufüge-Funktionalität.              | Das neue Todo erscheint in der Liste mit den korrekten Details. |
+|                              | Umschalten des Todo-Status                                                 | Validierung der Änderungsfunktion für "erledigt".       | Der Status des Todos wechselt zwischen "erledigt" und "nicht erledigt". |
+|                              | Aktualisieren der Kategorie eines Todos                                    | Sicherstellung der Kategoriewechselfunktion.           | Die neue Kategorie wird dem Todo korrekt zugewiesen.      |
+|                              | Filtern von Todos nach Kategorie                                           | Überprüfung der Filterlogik.                           | Nur Todos der ausgewählten Kategorie werden angezeigt.    |
+|                              | Speichern von Todos in localStorage                                        | Validierung der Speicherfunktion.                      | Die Todos werden erfolgreich im localStorage gespeichert. |
+|                              | Laden von Todos aus localStorage                                           | Sicherstellung der Ladefunktion.                       | Die Todos werden beim Laden der Seite aus dem localStorage geladen. |
+
+
+| **Komponente**              | **Testfall**                                                                 | **Beschreibung**                                         | **Erwartetes Ergebnis**                                    |
+|------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------|-----------------------------------------------------------|
+| **TodoContainer Component**  | Initialzustand rendern                                                      | Sicherstellung der korrekten Startbedingungen.          | Die Standardkategorien ("All", "Work", "Personal", "Shopping") und leere Todos werden angezeigt. |
+|                              | Hinzufügen eines neuen Todos                                               | Überprüfung der Hinzufüge-Funktionalität.              | Das neue Todo erscheint in der Liste mit den korrekten Details. |
+|                              | Umschalten des Todo-Status                                                 | Validierung der Änderungsfunktion für "erledigt".       | Der Status des Todos wechselt zwischen "erledigt" und "nicht erledigt". |
+|                              | Aktualisieren der Kategorie eines Todos                                    | Sicherstellung der Kategoriewechselfunktion.           | Die neue Kategorie wird dem Todo korrekt zugewiesen.      |
+|                              | Filtern von Todos nach Kategorie                                           | Überprüfung der Filterlogik.                           | Nur Todos der ausgewählten Kategorie werden angezeigt.    |
+|                              | Speichern von Todos in localStorage                                        | Validierung der Speicherfunktion.                      | Die Todos werden erfolgreich im localStorage gespeichert. |
+|                              | Laden von Todos aus localStorage                                           | Sicherstellung der Ladefunktion.                       | Die Todos werden beim Laden der Seite aus dem localStorage geladen. |
+
+---
+
+## **Zusammenfassung**
+- **Unit Tests:** 4 Tests auf Funktionsebene.
+- **Integration Tests:** 12 Tests für Interaktionen zwischen Komponenten.
+- **End-to-End Tests:** 7 Tests für vollständige Benutzerinteraktionen.
 
 Die Tests wurden nach den folgenden Prinzipien entwickelt:
 

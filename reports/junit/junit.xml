@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="23" failures="0" errors="0" time="2.994">
-  <testsuite name="sortTodosByPriority" errors="0" failures="0" skipped="0" timestamp="2025-01-09T08:05:19" time="0.703" tests="4">
+<testsuites name="jest tests" tests="30" failures="0" errors="0" time="3.068">
+  <testsuite name="sortTodosByPriority" errors="0" failures="0" skipped="0" timestamp="2025-01-09T08:45:48" time="0.692" tests="11">
     <testcase classname="sortTodosByPriority should sort todos by priority (high, medium, low)" name="sortTodosByPriority should sort todos by priority (high, medium, low)" time="0.01">
     </testcase>
-    <testcase classname="sortTodosByPriority should not modify the original todos array" name="sortTodosByPriority should not modify the original todos array" time="0">
+    <testcase classname="sortTodosByPriority should not modify the original todos array" name="sortTodosByPriority should not modify the original todos array" time="0.001">
     </testcase>
     <testcase classname="sortTodosByPriority should handle an empty array" name="sortTodosByPriority should handle an empty array" time="0">
     </testcase>
-    <testcase classname="sortTodosByPriority should handle todos with the same priority" name="sortTodosByPriority should handle todos with the same priority" time="0.001">
+    <testcase classname="sortTodosByPriority should handle todos with the same priority" name="sortTodosByPriority should handle todos with the same priority" time="0">
+    </testcase>
+    <testcase classname="filterTodosByCategory returns all todos when selectedCategory is &apos;All&apos;" name="filterTodosByCategory returns all todos when selectedCategory is &apos;All&apos;" time="0">
+    </testcase>
+    <testcase classname="filterTodosByCategory filters todos by selected category" name="filterTodosByCategory filters todos by selected category" time="0.001">
+    </testcase>
+    <testcase classname="filterTodosByCategory sorts todos by due date within the category" name="filterTodosByCategory sorts todos by due date within the category" time="0">
+    </testcase>
+    <testcase classname="filterTodosByCategory places todos without due dates after those with due dates" name="filterTodosByCategory places todos without due dates after those with due dates" time="0">
+    </testcase>
+    <testcase classname="filterTodosByCategory sorts todos by priority when due dates are the same or missing" name="filterTodosByCategory sorts todos by priority when due dates are the same or missing" time="0.001">
+    </testcase>
+    <testcase classname="filterTodosByCategory returns an empty array when no todos match the selected category" name="filterTodosByCategory returns an empty array when no todos match the selected category" time="0">
+    </testcase>
+    <testcase classname="filterTodosByCategory handles an empty todos array" name="filterTodosByCategory handles an empty todos array" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="InputTodo Component" errors="0" failures="0" skipped="0" timestamp="2025-01-09T08:05:19" time="1.29" tests="5">
-    <testcase classname="InputTodo Component renders input fields and buttons correctly" name="InputTodo Component renders input fields and buttons correctly" time="0.041">
+  <testsuite name="InputTodo Component" errors="0" failures="0" skipped="0" timestamp="2025-01-09T08:45:48" time="1.317" tests="5">
+    <testcase classname="InputTodo Component renders input fields and buttons correctly" name="InputTodo Component renders input fields and buttons correctly" time="0.04">
     </testcase>
     <testcase classname="InputTodo Component does not add a task when the input is empty" name="InputTodo Component does not add a task when the input is empty" time="0.01">
     </testcase>
@@ -19,39 +33,39 @@
     </testcase>
     <testcase classname="InputTodo Component does not add a category when the input is empty" name="InputTodo Component does not add a category when the input is empty" time="0.005">
     </testcase>
-    <testcase classname="InputTodo Component renders category options dynamically" name="InputTodo Component renders category options dynamically" time="0.07">
+    <testcase classname="InputTodo Component renders category options dynamically" name="InputTodo Component renders category options dynamically" time="0.073">
     </testcase>
   </testsuite>
-  <testsuite name="TodoItem Component" errors="0" failures="0" skipped="0" timestamp="2025-01-09T08:05:19" time="1.356" tests="7">
-    <testcase classname="TodoItem Component renders the todo item with correct details" name="TodoItem Component renders the todo item with correct details" time="0.107">
+  <testsuite name="TodoItem Component" errors="0" failures="0" skipped="0" timestamp="2025-01-09T08:45:48" time="1.368" tests="7">
+    <testcase classname="TodoItem Component renders the todo item with correct details" name="TodoItem Component renders the todo item with correct details" time="0.105">
     </testcase>
     <testcase classname="TodoItem Component marks the task as completed when checkbox is toggled" name="TodoItem Component marks the task as completed when checkbox is toggled" time="0.013">
     </testcase>
-    <testcase classname="TodoItem Component deletes the task when delete button is clicked" name="TodoItem Component deletes the task when delete button is clicked" time="0.012">
+    <testcase classname="TodoItem Component deletes the task when delete button is clicked" name="TodoItem Component deletes the task when delete button is clicked" time="0.011">
     </testcase>
-    <testcase classname="TodoItem Component allows editing the task title" name="TodoItem Component allows editing the task title" time="0.014">
+    <testcase classname="TodoItem Component allows editing the task title" name="TodoItem Component allows editing the task title" time="0.013">
     </testcase>
     <testcase classname="TodoItem Component changes the category of the task" name="TodoItem Component changes the category of the task" time="0.005">
     </testcase>
     <testcase classname="TodoItem Component highlights tasks that are due soon" name="TodoItem Component highlights tasks that are due soon" time="0.008">
     </testcase>
-    <testcase classname="TodoItem Component does not highlight tasks that are not due soon" name="TodoItem Component does not highlight tasks that are not due soon" time="0.006">
+    <testcase classname="TodoItem Component does not highlight tasks that are not due soon" name="TodoItem Component does not highlight tasks that are not due soon" time="0.008">
     </testcase>
   </testsuite>
-  <testsuite name="TodoContainer Component" errors="0" failures="0" skipped="0" timestamp="2025-01-09T08:05:19" time="1.46" tests="7">
-    <testcase classname="TodoContainer Component renders with initial state" name="TodoContainer Component renders with initial state" time="0.051">
+  <testsuite name="TodoContainer Component" errors="0" failures="0" skipped="0" timestamp="2025-01-09T08:45:48" time="1.476" tests="7">
+    <testcase classname="TodoContainer Component renders with initial state" name="TodoContainer Component renders with initial state" time="0.065">
     </testcase>
-    <testcase classname="TodoContainer Component adds a new todo" name="TodoContainer Component adds a new todo" time="0.05">
+    <testcase classname="TodoContainer Component adds a new todo" name="TodoContainer Component adds a new todo" time="0.044">
     </testcase>
-    <testcase classname="TodoContainer Component toggles todo completion" name="TodoContainer Component toggles todo completion" time="0.048">
+    <testcase classname="TodoContainer Component toggles todo completion" name="TodoContainer Component toggles todo completion" time="0.061">
     </testcase>
-    <testcase classname="TodoContainer Component updates a todo category" name="TodoContainer Component updates a todo category" time="0.023">
+    <testcase classname="TodoContainer Component updates a todo category" name="TodoContainer Component updates a todo category" time="0.022">
     </testcase>
-    <testcase classname="TodoContainer Component filters todos by category" name="TodoContainer Component filters todos by category" time="0.026">
+    <testcase classname="TodoContainer Component filters todos by category" name="TodoContainer Component filters todos by category" time="0.021">
     </testcase>
-    <testcase classname="TodoContainer Component saves todos to localStorage" name="TodoContainer Component saves todos to localStorage" time="0.013">
+    <testcase classname="TodoContainer Component saves todos to localStorage" name="TodoContainer Component saves todos to localStorage" time="0.01">
     </testcase>
-    <testcase classname="TodoContainer Component loads todos from localStorage" name="TodoContainer Component loads todos from localStorage" time="0.008">
+    <testcase classname="TodoContainer Component loads todos from localStorage" name="TodoContainer Component loads todos from localStorage" time="0.009">
     </testcase>
   </testsuite>
 </testsuites>
