@@ -72,3 +72,86 @@ Dazu sollten wir uns auch ein wenig besser im Unterricht konzentrieren.
 
 Wir sind grundsätzlich zufrieden mit dem was wir gemacht haben, jedoch hätten wir schon erwartet das wir ein wenig weiter sind.
 Aber wir glauben, dass wir den rest relativ schnell fertig bekommen.
+
+---
+
+---
+
+---
+
+# Reflexion 2.0
+
+## Einleitung
+
+- **Datum:**
+    16.01.2025
+- **Projektname:**
+    Todo-Liste getestet mit CI/CD
+
+## Ziele
+
+- **Was waren die Hauptziele des Projekts?**
+
+Wir wollten diese beiden User Stories umsetzen und testen:
+
+1. User-Story 1 – Aufgaben priorisieren
+2. User-Story 2 – Aufgaben in Kategorien einteilen
+
+Haben uns dann aber dafür entschieden alles Umzusetzen, Somit haben wir ale drei gemacht und getestet.
+
+## Erfolge
+
+- **Welche Ziele wurden erreicht?**
+
+Wir haben alle Stories umgesetzt und tests für alles erstellt, siehe README.md für mehr Infos.
+Dazu haben wir unsere CI/CD umgebaut bzw. verbessert. Sie deployed das ganze auf GitHub Pages und ist parallelisiert.
+
+- **Welche Meilensteine wurden erfolgreich abgeschlossen?**
+
+1. User-Story 1 – Aufgaben priorisieren implementiert
+2. User-Story 2 – Aufgaben in Kategorien einteilen implementiert
+3. User-Story 3 – Aufgaben mit Due-Date versehen implementiert
+4. CI/CD Pipeline eingerichtet und verbessert
+
+## Herausforderungen
+
+- **Welche Herausforderungen sind aufgetreten?**
+
+Wir hatten keine herausforderungen, ausser unsere eigene Faulheit. Diese konnten wir aber mit dem richtigen Druck überwinden.
+WObei für die Pipeline wir die Hilfe von Herr Chat GPT brauchten.
+Auch wenn er mehr Probleme verursachte als löste.
+
+- **Wie wurden diese Herausforderungen gemeistert?**
+
+Wir konnten diese Probleme mit Dedikation und der Hilfe von Herr Chat GPT meistern.
+Dazu hat uns auch geholfen, dass wir uns gegenseitig unterstützt haben.
+
+## Erkenntnisse
+
+- **Was wurde aus dem Projekt gelernt?**
+
+Man muss sich wirklich mit den Themen ausseinandersetzen, CHat GPT ist nicht immer die Lösung.
+Er versuchte zum Beispiel oft bei der CI/CD Pipeline veraltete Technologien zu verwenden oder hat überaus komplizierte Lösungen vorgeschlagen, die gar nicht Nötig waren.
+
+Ausserdem haben wir gelernt wie man ein ganzes Projekt einrichtet mit Pipeline und Tests, welche jetzt kontunierlich während der Entwicklung laufen.
+
+- **Welche neuen Fähigkeiten oder Kenntnisse wurden erworben?**
+
+Chaching in Github Actions, Parallelisierung von Jobs in Github Actions, Testing von Webapplikationen, Deployment von Webapplikationen auf GitHub Pages.
+
+Wenn wir uns richtig anstrengen hätten wir vermutlich noch mehr geschafft.
+
+## Verbesserungsmöglichkeiten
+
+- **Was könnte in zukünftigen Projekten verbessert werden?**
+
+Wir könnten definitv unsere Arbeitsmoral verbessern, dazu wollen wir nicht mehr so viel Zeit mit Chat GPT verbringen, sondern unser eigenes Wissen auf den benötigten Stand bringen, dass wir so ein Projekt vollkommen selber erstellen könnten.
+
+- **Welche Strategien könnten implementiert werden, um ähnliche Herausforderungen zu vermeiden?**
+
+Besseres verständis von Github Actions ansammeln.
+
+## Fazit
+
+Wir sind stolz, dass wir alles umsetzen konnten und sogar noch etwas mehr mit dem deployment auf GitHub Pages.
+Dazu finden wir, dass unsere Tests so wie wir sie strukturiert haben sehr Sinnvoll sind.
