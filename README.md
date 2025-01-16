@@ -15,9 +15,11 @@ Wie haben die Aufgabe erhalten, für die Module 450 und 324 eine Todo-App zu ers
 Kernpunkte waren Das TEsting und die CI/CD Pipeline.
 Diese Punkte haben wir hier im Projektbericht zusammengefasst.
 
-So sieht die Todo-App aus:
+Via dem Link opne Rechts können sie auf die Website und Das Tool benutzen.
 
-![alt text](image.png)
+## Reflexion
+
+[Reflexion](https://github.com/BusinessTable/m324-m450-p-ado-armi/blob/main/REFLEXION.md)
 
 ## **Inhaltsverzeichnis**
 
